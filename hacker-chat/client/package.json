@@ -1,11 +1,13 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "user01": "node src/index.js --username hr --room sala01 --hostUrl localhost",
+    "user02": "node src/index.js --username userName01 --room sala01 --hostUrl https://localhost:9898"
   },
   "dependencies": {
     "blessed": "^0.1.81"
