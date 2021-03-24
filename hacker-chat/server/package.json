@@ -1,7 +1,17 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "npx nodemon src/index.js"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }

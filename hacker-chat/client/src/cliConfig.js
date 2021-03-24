@@ -4,7 +4,6 @@ export default class CliConfig {
     this.room = room;
 
     const { hostname, port, protocol } = new URL(hostUrl);
-    console.log({ hostname, port, protocol });
     this.host = hostname;
     this.port = port;
     this.protocol = protocol.replace(/\W/, "");
