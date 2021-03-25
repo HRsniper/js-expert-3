@@ -22,10 +22,6 @@ export default class EventManager {
     this.#updateUsersComponent();
   }
 
-  #updateUsersComponent() {
-    this.componentEmitter.emit(constants.events.app.STATUS_UPDATED, Array.from(this.#allUsers.values()));
-  }
-
   newUserConnected(message) {
     const user = message;
     this.#allUsers.set(user.id, user.userName);
@@ -35,6 +31,10 @@ export default class EventManager {
 
   #updateActivityLogComponent(message) {
     this.componentEmitter.emit(constants.events.app.ACTIVITYLOG_UPDATED, message);
+  }
+
+  #updateUsersComponent() {
+    this.componentEmitter.emit(constants.events.app.STATUS_UPDATED, Array.from(this.#allUsers.values()));
   }
 
   getEvents() {

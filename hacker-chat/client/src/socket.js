@@ -10,10 +10,8 @@ export default class SocketClient {
     this.protocol = protocol;
   }
 
-  async sendMessage(event, message) {
-    const data = JSON.stringify({ event, message });
-    // this.#serverConnection.write(`${data}\n`);
-    this.#serverConnection.write(data);
+  sendMessage(event, message) {
+    this.#serverConnection.write(JSON.stringify({ event, message }));
   }
 
   attachEvents(events) {

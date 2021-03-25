@@ -31,14 +31,14 @@ export default class Controller {
     const currentUsers = Array.from(users.values()).map(({ id, userName }) => ({ userName, id }));
 
     //  atualiza o usuário corrente sobre quais usuários que ja estão conectados na mesma sala
-    this.socketServer.sendMessage(user.socket, constants.events.socket.UPDATE_USERS, currentUsers);
+    this.socketServer.sendMessage(user.socket, constants.event.UPDATE_USERS, currentUsers);
 
     // avisa a rede que um novo usuário conectou-se
     this.broadCast({
       socketId,
       roomId,
       message: { id: socketId, userName: userData.userName },
-      event: constants.events.socket.NEW_USER_CONNECTED
+      event: constants.event.NEW_USER_CONNECTED
     });
   }
 
@@ -70,7 +70,6 @@ export default class Controller {
     return (data) => {
       try {
         const { event, message } = JSON.parse(data);
-
         // this.joinRoom(id, message);
         this[event](id, message);
       } catch (error) {

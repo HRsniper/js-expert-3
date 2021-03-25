@@ -6,14 +6,6 @@ export default class TerminalController {
 
   constructor() {}
 
-  #onInputReceived(eventEmitter) {
-    return function () {
-      const message = this.getValue();
-      eventEmitter.emit(constants.events.app.MESSAGE_SENT, message);
-      this.clearValue();
-    };
-  }
-
   #pickCollor() {
     return `#${(((1 << 24) * Math.random()) | 0).toString(16)}-fg`;
   }
@@ -29,12 +21,21 @@ export default class TerminalController {
     return collor;
   }
 
+  #onInputReceived(eventEmitter) {
+    return function () {
+      const message = this.getValue();
+      eventEmitter.emit(constants.events.app.MESSAGE_SENT, message);
+      this.clearValue();
+    };
+  }
+
   #onMessageReceived({ screen, chat }) {
     return (msg) => {
       const { userName, message } = msg;
       const collor = this.#getUserCollor(userName);
 
       chat.addItem(`{${collor}}{bold}${userName}{/}: ${message}`);
+
       screen.render();
     };
   }
@@ -46,6 +47,7 @@ export default class TerminalController {
       const collor = this.#getUserCollor(userName);
 
       activityLog.addItem(`{${collor}}{bold}${msg.toString()}{/}`);
+
       screen.render();
     };
   }
@@ -80,24 +82,13 @@ export default class TerminalController {
       .setLayoutComponent()
       .setInputComponent(this.#onInputReceived(eventEmitter))
       .setChatComponent()
-      .setStatusComponent()
       .setActivityLogComponent()
+      .setStatusComponent()
       .build();
 
     this.#registerEvents(eventEmitter, components);
 
     components.input.focus();
     components.screen.render();
-
-    // setInterval(() => {
-    //   const users = ["userName1"];
-    //   eventEmitter.emit(constants.events.app.ACTIVITYLOG_UPDATED, "userName2 join");
-    //   users.push("userName2");
-    //   eventEmitter.emit(constants.events.app.MESSAGE_RECEIVED, { message: "ola", userName: "userName1" });
-    //   eventEmitter.emit(constants.events.app.MESSAGE_RECEIVED, { message: "'-'", userName: "userName2" });
-    //   eventEmitter.emit(constants.events.app.ACTIVITYLOG_UPDATED, "userName1 left");
-    //   users.push("userName3", "userName4", "userName5");
-    //   eventEmitter.emit(constants.events.app.STATUS_UPDATED, users);
-    // }, 1000);
   }
 }

@@ -1,9 +1,10 @@
 export default class CliConfig {
-  constructor({ username, room, hostUrl }) {
+  constructor({ username, hostUri, room }) {
     this.username = username;
     this.room = room;
 
-    const { hostname, port, protocol } = new URL(hostUrl);
+    const { hostname, port, protocol } = new URL(hostUri);
+
     this.host = hostname;
     this.port = port;
     this.protocol = protocol.replace(/\W/, "");
@@ -11,17 +12,14 @@ export default class CliConfig {
 
   static parseArguments(commands) {
     const cmd = new Map();
-
     for (const key in commands) {
-      const commandPrefix = "--";
-      const command = commands[key];
       const index = parseInt(key);
+      const command = commands[key];
 
+      const commandPrefix = "--";
       if (!command.includes(commandPrefix)) continue;
 
-      const commandKey = command.replace(commandPrefix, "");
-      const commandValue = commands[index + 1];
-      cmd.set(commandKey, commandValue);
+      cmd.set(command.replace(commandPrefix, ""), commands[index + 1]);
     }
 
     return new CliConfig(Object.fromEntries(cmd));

@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "user01": "node src/index.js --username hr --room sala01 --hostUrl http://localhost:9898",
-    "user02": "node src/index.js --username userName01 --room sala01 --hostUrl http://localhost:9898"
+    "user01": "node src/index.js --username hr --room sala01 --hostUri http://localhost:9898",
+    "user02": "node src/index.js --username userName01 --room sala01 --hostUri http://localhost:9898"
   },
   "dependencies": {
     "blessed": "^0.1.81"

@@ -99,10 +99,10 @@ export default class ComponentsBuilder {
       parent: this.#layout,
       width: "25%",
       height: "90%",
-      items: ["{bold}Activity Log{/}"],
       style: {
         fg: "yellow"
-      }
+      },
+      items: ["{bold}Activity Log{/}"]
     });
 
     return this;
@@ -113,8 +113,8 @@ export default class ComponentsBuilder {
       screen: this.#screen,
       input: this.#input,
       chat: this.#chat,
-      status: this.#status,
-      activityLog: this.#activityLog
+      activityLog: this.#activityLog,
+      status: this.#status
     };
 
     return components;
