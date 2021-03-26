@@ -1,5 +1,7 @@
+const PRODUCTION_UL = "https://hackerchat-hr.herokuapp.com/";
+
 export default class CliConfig {
-  constructor({ username, hostUri, room }) {
+  constructor({ username, hostUri = PRODUCTION_UL, room }) {
     this.username = username;
     this.room = room;
 
